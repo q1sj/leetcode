@@ -1,4 +1,4 @@
-package cn.q1sj;
+package cn.q1sj.dp;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * 119杨辉三角2
+ *
  * @author Q1sj
  * @date 2023.12.26 15:18
  */
