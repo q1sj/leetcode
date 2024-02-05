@@ -44,16 +44,13 @@ public class Solution496 {
 		Solution496 solution = new Solution496();
 		Assert.assertArrayEquals(new int[]{-1, 3, -1}, solution.nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2}));
 		Assert.assertArrayEquals(new int[]{3, -1}, solution.nextGreaterElement(new int[]{2, 4}, new int[]{1, 2, 3, 4}));
-		//	测试用例:[1,3,5,2,4]
-		//			[6,5,4,3,2,1,7]
-		//	测试结果:[7,-1,-1,-1,-1]
-		//	期望结果:[7,7,7,7,7]
 		Assert.assertArrayEquals(new int[]{7, 7, 7, 7, 7}, solution.nextGreaterElement(new int[]{1, 3, 5, 2, 4}, new int[]{6, 5, 4, 3, 2, 1, 7}));
 
 	}
 
 	public int[] nextGreaterElement(int[] nums1, int[] nums2) {
 		int[] ans = new int[nums1.length];
+		// 单调栈
 		Stack<Integer> stack = new Stack<>();
 		// key:num1 value:greater value
 		Map<Integer, Integer> map = new HashMap<>();
