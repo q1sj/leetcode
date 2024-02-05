@@ -1,10 +1,12 @@
-package cn.q1sj.hash;
+package cn.q1sj.stack;
+
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * 下一个更大元素1
@@ -50,6 +52,24 @@ public class Solution496 {
 
 	}
 
+	public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+		int[] ans = new int[nums1.length];
+		Stack<Integer> stack = new Stack<>();
+		// key:num1 value:greater value
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int i = nums2.length - 1; i >= 0; i--) {
+			while (!stack.isEmpty() && stack.peek() < nums2[i]) {
+				stack.pop();
+			}
+			map.put(nums2[i], stack.isEmpty() ? -1 : stack.peek());
+			stack.push(nums2[i]);
+		}
+		for (int i = 0; i < nums1.length; i++) {
+			ans[i] = map.get(nums1[i]);
+		}
+		return ans;
+	}
+
 	/**
 	 * nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。
 	 * <p>
@@ -63,7 +83,7 @@ public class Solution496 {
 	 * @param nums2
 	 * @return
 	 */
-	public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+	public int[] nextGreaterElement2(int[] nums1, int[] nums2) {
 		int[] ans = new int[nums1.length];
 		// nums2[i],i
 		Map<Integer, Integer> map = new HashMap<>();
@@ -82,6 +102,24 @@ public class Solution496 {
 				}
 			}
 			ans[i] = -1;
+		}
+		return ans;
+	}
+
+	@Test
+	public void test2() {
+		int[] ints = nextGreaterElement(new int[]{2, 1, 2, 4, 3});
+	}
+
+	static int[] nextGreaterElement(int[] nums) {
+		int[] ans = new int[nums.length]; // 存放答案的数组
+		Stack<Integer> s = new Stack<>();
+		for (int i = nums.length - 1; i >= 0; i--) { // 倒着往栈里放
+			while (!s.empty() && s.peek() <= nums[i]) { // 判定个子高矮
+				s.pop(); // 矮个起开，反正也被挡着了。。。
+			}
+			ans[i] = s.empty() ? -1 : s.peek(); // 这个元素身后的第一个高个
+			s.push(nums[i]); // 进队，接受之后的身高判定吧！
 		}
 		return ans;
 	}
